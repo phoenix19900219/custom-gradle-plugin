@@ -51,12 +51,22 @@ OS:           Mac OS X 10.16 x86_64
 
 
 
-```
+```shell
+# 添加一个远程仓库
 $ git remote add origin https://github.com/phoenix19900219/custom-gradle-plugin.git
+
+# 查看远程仓库
 $ git remote
 origin
-$ git remote -v
+
+$ git remote -v # 查看远程仓库详细信息 (可以看到远程仓库的地址)
 origin	https://github.com/phoenix19900219/custom-gradle-plugin.git (fetch)
 origin	https://github.com/phoenix19900219/custom-gradle-plugin.git (push)
+
+
+$ git pull	# 拉取远程仓库内容
+
+# 将本地仓库的分支与远程仓库的分支进行关联
+$ git branch --set-upstream-to=origin/main master # 关联分支
 ```
 
