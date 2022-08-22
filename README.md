@@ -71,5 +71,17 @@ $ git branch --set-upstream-to=origin/main master # 关联分支
 
 $ git push origin  
 $ git push origin HEAD:main # 本地分支与远程分支的 分支名不匹配时 !
+
+
+# -- 推送到远程仓库
+$ git push origin local_branch:remote_branch
+# 如: 
+$ git push origin master:master
+
+
+# -- 设置关联 (推送一个分支到远程仓库并设置关联)
+$ git push --set-upstream origin new_branch
+# 如: 推送本地当前分支到 origin 远程仓库 并 与它的master关联
+$ git push --set-upstream origin master
 ```
 
