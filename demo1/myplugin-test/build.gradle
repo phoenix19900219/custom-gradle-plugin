@@ -1,0 +1,56 @@
+// plugins { id xxx } 报下面的错误!!
+/*
+- Plugin Repositories (could not resolve plugin artifact 'com.stone.plugin:com.stone.plugin.gradle.plugin:1.1')
+  Searched in the following repositories:
+    maven(file:/Users/stone/works/compose-demo1/repo/)
+    MavenLocal(file:/Users/stone/.m2/repository/)
+ */
+
+
+buildscript {
+    // 定义获取插件的仓库地址: 从本地仓库中获取
+    repositories {
+        maven {
+            // println "local maven => ${rootDir}/repo"  // /Users/stone/works/compose-demo1/repo
+            url = uri("$rootDir/repo")
+        }
+    }
+    dependencies {
+        classpath 'com.stone:myplugin:1.1' // 插件的classpath
+    }
+}
+
+// 会标准插件不要用 "plugins {id xxx}" 来使用, 应该用 "apply plugin: xxx", 
+// 否则报错!
+//plugins {
+//    // META-INF/gralde-plugins/{文件名}.properties
+//    // id 就是 文件名
+//    id 'com.stone.plugin'
+//    id 'com.stone.plugin' version '1.1'
+//}
+
+
+
+// 操作步骤: 
+// 1. 先注释掉下面的 "apply ..." 和 "ext.greetingFile = ..." 和 上面的 "classpath ...", 
+// 2. 如果没有 gradlew 或 gradlew.bat, 先执行 "gradle wrapper" 命令生成 这两个文件 
+//    tips: 执行 "gradle wrapper" 会生成 gradlew,gradlew.bat, gradle目录及此目录下的文件        
+// 3. 执行: ./gradlew :myplugin:publish  => 编译插件 并 发布到本地仓库 "..../demo1/repo/" 目录下
+// 4. 放开  "apply ..." 和 "ext.greetingFile = ..." 和 上面的 "classpath ..." 行首的注释, 
+// 5. 执行: ./gradlew :myplugin-test:generateFile  => 输出如下:
+// Hello World !
+
+
+// 插件名就是 META-INF/gradle-plugins/ 目录下的properties文件的名称!!!!
+// 并不是 publications 中定义的jar包 坐标 "groupId:artifactId:versoin"
+apply plugin: 'myplugin'
+
+
+// 插件中可以 直接用 project.greetingFile 来访问 当前脚本中 下列两种方式定义的扩展属性:
+// extensions.greetingFile = "${rootDir}/testdata/hello.txt"
+ext.greetingFile = "${rootDir}/testdata/hello.txt"
+
+// plugins {} 会使用标准插件, 自定义插件用 "apply plugin: xxx", 否则报错!!
+//plugins {
+//    id 'com.stone.plugin' version '1.1'
+//}

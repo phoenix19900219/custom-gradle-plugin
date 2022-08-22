@@ -1,6 +1,7 @@
 .gradle
 /build/
 
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
@@ -10,5 +11,19 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 
-# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties
+
+/demo1/.gradle
+/demo2/.gradle
+/demo1/gradlew
+/demo1/gradlew.bat
+/demo2/gradlew
+/demo2/gradlew.bat
+/demo1/local.properties
+/demo2/local.properties
+/demo2/.gitattributes
+/demo2/.gitignore
+/demo1/repo
+/demo2/repo
+/demo1/build/
+/demo2/build/
+

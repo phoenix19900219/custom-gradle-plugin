@@ -1,0 +1,107 @@
+// plugins{} => org.gradle.plugin.use.PluginDependenciesSpec.java
+plugins {
+    // id => org.gradle.plugin.use.PluginDependenciesSpec.java
+    id 'groovy'
+    id 'application'
+    id 'maven-publish'
+}
+
+// JavaVersion => org.gradle.api.JavaVersion
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+// dependencies{} => org.gradle.api.Project
+dependencies {
+    implementation gradleApi()  // gradleApi() => org.gradle.api.artifacts.dsl.DependencyHandler
+    implementation localGroovy() // localGroovy() => org.gradle.api.artifacts.dsl.DependencyHandler
+}
+
+/*
+// settings.gradle 中已经配置了 repositories{}, 这里再配置会导致错误:
+// Build was configured to prefer settings repositories over project repositories but repository 'MavenRepo' was added by build file 'myplugins/build.gradle'
+
+// repositories {} => org.gradle.api.Project
+repositories {
+    mavenCentral() // mavenCentral() => org.gradle.api.artifacts.dsl.RepositoryHandler
+}
+*/
+
+
+// https://docs.gradle.org/current/userguide/publishing_maven.html
+
+// ./gradlew :myplugins:tasks       => 查看有哪些task
+// ./gradlew :myplugins:publish     => 执行 publish 任务 (publish ,  发布任务)
+// ./gradlew :myplugins:publishToMavenLocal     => 执行 publish 任务 (publish ,  发布任务)
+//
+// 任务说明:
+// publish - Publishes all publications produced by this project.
+// publishToMavenLocal - Publishes all Maven publications produced by this project to the local Maven cache.
+
+publishing {
+    // 配置当前插件发布的位置 (发布到哪个仓库)
+    repositories {
+        maven {
+            // /Users/stone/works/compose-demo1/myplugins/build/repo
+            // url = layout.buildDirectory.dir('repo')
+
+            // /Users/stone/works/compose-demo1/repo
+            url = rootProject.layout.projectDirectory.dir("repo")
+            // url setUrl()  => org.gradle.api.artifacts.repositories.MavenArtifactRepository
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            // com.stone:plugin:1.1 (jar包坐标)
+            groupId = 'com.stone'
+            artifactId = 'myplugin'
+            version = '1.1'
+
+            from components.java  // components getComponents() => org.gradle.api.Project
+        }
+    }
+}
+
+
+
+// 测试 各种路径:
+// 执行任务:  ./gradlew :myplugins:mytest
+task mytest {
+    println "project.path => ${project.path}"           // :myplugins
+    println "rootProject.path => ${rootProject.path}"   // :
+
+    println "buildDir => ${buildDir}" // /Users/stone/works/compose-demo1/myplugins/build
+    println "project.buildDir => ${project.buildDir}" // /Users/stone/works/compose-demo1/myplugins/build
+    println "rootProject.buildDir => ${rootProject.buildDir}" // /Users/stone/works/compose-demo1/build
+
+    println "projectDir => ${projectDir}"   // /Users/stone/works/compose-demo1/myplugins
+    println "rootDir => ${rootDir}"         // /Users/stone/works/compose-demo1
+
+    println "project.projectDir => ${project.projectDir}"   // /Users/stone/works/compose-demo1/myplugins
+    println "project.rootDir => ${project.rootDir}"         // /Users/stone/works/compose-demo1
+    println "rootProject.projectDir => ${rootProject.projectDir}" // /Users/stone/works/compose-demo1
+    println "rootProject.rootDir => ${rootProject.rootDir}" // /Users/stone/works/compose-demo1
+
+    println "layout.buildDirectory => ${layout.buildDirectory}"
+    println "layout.buildDirectory.dir('repo') => ${layout.buildDirectory.dir('repo')}"
+
+    // /Users/stone/works/compose-demo1/myplugins/build/repo
+    println "layout.buildDirectory.dir('repo') => ${layout.buildDirectory.dir('repo').get()}"
+
+    // /Users/stone/works/compose-demo1/myplugins/build
+    println "project.layout.buildDirectory.get() => ${project.layout.buildDirectory.get()}"
+
+    // /Users/stone/works/compose-demo1/myplugins
+    println "project.layout.projectDirectory => ${project.layout.projectDirectory}"
+
+    // /Users/stone/works/compose-demo1/build
+    println "${rootProject.layout.buildDirectory.get()}"
+
+    // /Users/stone/works/compose-demo1
+    println "${rootProject.layout.projectDirectory}"
+
+    println "rootProject.layout.projectDirectory.dir('repo') => ${rootProject.layout.projectDirectory.dir('repo')}"
+}
