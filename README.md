@@ -4,7 +4,9 @@
 
 自定义gradle插件 并 将插件发布到本地maven仓库中, 然后在其他项目中使用此插件  
 
+<br/>
 
+<br/>
 
 ### 测试环境:
 
@@ -32,7 +34,9 @@ OS:           Mac OS X 10.16 x86_64
 
 
 
+<br/>
 
+<br/>
 
 ### 操作步骤
 
@@ -49,9 +53,12 @@ OS:           Mac OS X 10.16 x86_64
 
 
 
-
+<br/><br/>
 
 ```shell
+# https://blog.csdn.net/John_desheng/article/details/112663991
+
+
 # 添加一个远程仓库
 $ git remote add origin https://github.com/phoenix19900219/custom-gradle-plugin.git
 
@@ -113,5 +120,6 @@ $ git branch -a		# 查看所有分支 (本地/远程)
 # git merge <some_branch>		# 合并当前分支 与 指定的某个分支
 # 如:
 $ git merge main		# 将当前分支与 main 分支合并!
+
 ```
 
