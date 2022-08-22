@@ -109,5 +109,9 @@ $ git branch -a		# 查看所有分支 (本地/远程)
 * master
   remotes/origin/main
   remotes/origin/master
+  
+# git merge <some_branch>		# 合并当前分支 与 指定的某个分支
+# 如:
+$ git merge main		# 将当前分支与 main 分支合并!
 ```
 
