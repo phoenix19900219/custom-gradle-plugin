@@ -26,4 +26,9 @@ gradle-app.setting
 /demo2/repo
 /demo1/build/
 /demo2/build/
+/demo1/testdata/
+/demo2/testdata/
+.DS_Store
+/demo1/.DS_Store
+/demo2/.DS_Store
 
