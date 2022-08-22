@@ -68,5 +68,8 @@ $ git pull	# 拉取远程仓库内容
 
 # 将本地仓库的分支与远程仓库的分支进行关联
 $ git branch --set-upstream-to=origin/main master # 关联分支
+
+$ git push origin  
+$ git push origin HEAD:main # 本地分支与远程分支的 分支名不匹配时 !
 ```
 
