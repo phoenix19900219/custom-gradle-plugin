@@ -46,3 +46,17 @@ OS:           Mac OS X 10.16 x86_64
 // 5. 执行: ./gradlew :myplugin-test:generateFile  => 输出如下:
 // Hello World !
 ```
+
+
+
+
+
+```
+$ git remote add origin https://github.com/phoenix19900219/custom-gradle-plugin.git
+$ git remote
+origin
+$ git remote -v
+origin	https://github.com/phoenix19900219/custom-gradle-plugin.git (fetch)
+origin	https://github.com/phoenix19900219/custom-gradle-plugin.git (push)
+```
+
