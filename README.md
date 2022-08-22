@@ -83,5 +83,31 @@ $ git push origin master:master
 $ git push --set-upstream origin new_branch
 # 如: 推送本地当前分支到 origin 远程仓库 并 与它的master关联
 $ git push --set-upstream origin master
+
+
+
+
+$ git status		# git status 可以查看到当前分装, 已经其所关联的远程分支信息!!
+On branch master																		# 当前分装信息
+Your branch is ahead of 'origin/main' by 1 commit.	# 关联分支信息
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+
+
+$ git branch --unset-upstream	# 取消当前分支与远程分支的关联
+$ git branch --unset-upstream <local_branch>	# 取消本地某个分支与远程分支的关联
+
+
+
+$ git branch -r		# -r 查看远程分支
+  origin/main
+  origin/master
+$ git branch -a		# 查看所有分支 (本地/远程)
+  main
+* master
+  remotes/origin/main
+  remotes/origin/master
 ```
 
