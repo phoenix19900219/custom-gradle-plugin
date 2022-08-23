@@ -4,6 +4,14 @@
 
 自定义gradle插件 并 将插件发布到本地maven仓库中, 然后在其他项目中使用此插件  
 
+
+
+### 如何发布jar/aar到本地仓库
+
+https://www.jianshu.com/p/0629548ab5a4
+
+
+
 <br/>
 
 <br/>
